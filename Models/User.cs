@@ -15,7 +15,11 @@ public class User
     
     [Required]  
     [MinLength(2, ErrorMessage = "Last name must be at least 2 characters long.")]      
-    public string LastName { get; set; }         
+    public string LastName { get; set; }  
+
+    [Required]
+    [MaxLength(20, ErrorMessage = "Username cannot exceed 20 characters")]   
+    public string Username {get; set;}    
     
     [Required]
     [EmailAddress]

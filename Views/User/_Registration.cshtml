@@ -18,6 +18,12 @@
                     <span asp-validation-for="LastName" class="text-danger font-weight-bold"></span>
                 </div>
                 <div class="mb-3 p-3">
+                    <label asp-for="Username">Username:</label>
+                    <input type="text" class="form-control" id="Username" placeholder="Please Enter an Username"
+                        asp-for="Username">
+                    <span asp-validation-for="Username" class="text-danger font-weight-bold"></span>
+                </div>
+                <div class="mb-3 p-3">
                     <label asp-for="Email">Email:</label>
                     <input type="text" class="form-control" id="Email" placeholder="Please Enter Your Email"
                         asp-for="Email">
