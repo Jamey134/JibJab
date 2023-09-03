@@ -43,7 +43,7 @@ public class BlogController : Controller
         return View("New"); //<--- HTML page to see our new, displayed wedding
     }
 
-    //-------Add a wedding into db--------
+    //-------Add a Blog into db--------
     [HttpPost("blogs/create")]
     public IActionResult Create(Blog newBlog) //<----- Method to create a wedding and add in db
     {

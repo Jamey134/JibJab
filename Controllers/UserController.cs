@@ -84,6 +84,7 @@ public class UserController : Controller
             {
                 //HANDLE SUCCESS (THIS SHOULD ROUTE TO AN INTERNAL PAGE)
                 HttpContext.Session.SetInt32("UUID", userInDb.UserId);
+                HttpContext.Session.SetString("Username", userInDb.Username);
                 return RedirectToAction("Index", "blog"); // Make sure to change for the exam("Method Action from controller", "Name of controller where the method is from")
             }
 
