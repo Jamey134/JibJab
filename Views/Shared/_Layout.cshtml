@@ -31,12 +31,19 @@
                                 asp-action="Privacy">Privacy</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Blog" asp-action="New">Add Blog</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Blog" asp-action="New">Add
+                                Blog</a>
                         </li>
-                            @*Since "Logout" is a post method, we need to create a form in order for the method to excute*@
-                            <form asp-controller="User" asp-action="Logout" method="post">
+                        @*Since "Logout" is a post method, we need to create a form in order for the method to excute*@
+                        <form asp-controller="User" asp-action="Logout" method="post">
                             <button class="btn btn-outline-light">Logout</button>
-                            </form>
+                        </form>
+                        @* <form asp-controller="Blog" asp-action="Edit" method="post">
+                            @if (Model.UserId == Context.Session.GetInt32("UUID"))
+                            {
+                                <button class="btn btn-outline-light">Edit Post</button>
+                            }
+                        </form> *@
                     </ul>
                 </div>
             </div>
