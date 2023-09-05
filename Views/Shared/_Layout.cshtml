@@ -30,17 +30,8 @@
                             <a class="nav-link text-light" asp-area="" asp-controller="Home"
                                 asp-action="Privacy">Privacy</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Options
-                            </a>
-                            <ul class="dropdown-menu">
-                                @* <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <div class="dropdown-divider"></div> *@
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Blog" asp-action="Create">Post a Blog</a></li>
-                            </ul>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Blog" asp-action="New">Add Blog</a>
                         </li>
                             @*Since "Logout" is a post method, we need to create a form in order for the method to excute*@
                             <form asp-controller="User" asp-action="Logout" method="post">

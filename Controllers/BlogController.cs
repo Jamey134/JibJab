@@ -30,13 +30,15 @@ public class BlogController : Controller
     public IActionResult Index()
     {
         {
+            // One to Many 
+            List<Blog> blogs = db.Blogs.ToList();
             //Many to many, add guests list and invited guests, to get 3 tables of information
             //List<Blog> blogs = db.Weddings.Include(g => g.Guests).ThenInclude(u => u.User).Include(c => c.Creator).ToList();
-            return View("All");
+            return View("All", blogs);
         }
     }
 
-    //-------Display Page For Wedding Form------
+    //-------Display Page For Blog Form------
     [HttpGet("blogs/new")]
     public IActionResult New()
     {
@@ -59,5 +61,56 @@ public class BlogController : Controller
             // call the method to render the new page
             return View("New");
         }
+    }
+
+//---------View One (READ) Wedding----------
+    // [HttpGet("blogs/{postId}")] //<--- Double check the id nomenclature
+    // public IActionResult Details(int postId)
+    // {
+    //     //Include many to many guests list
+    //     Blog? wedding = db.Blogs.Include(g => g.Guests).ThenInclude(u => u.User).FirstOrDefault(w => w.WeddingId == weddingId);
+
+    //     if (wedding == null)
+    //     {
+    //         return RedirectToAction("Index");
+    //     }
+    //     return View("Details", wedding);
+    // }
+
+    // ----------Update Blog-----------
+    [HttpGet("blog/{id}/edit")]
+
+    //add id in parameter*
+    public IActionResult Edit(int id)
+    {
+        // confirm it matches the id we're passing in above*
+    Blog? blogs = db.Blogs.Include(v => v.Creator).FirstOrDefault(p => p.PostId == id);
+
+    //confirming the creator of the wedding is editing 
+    if (blogs == null || blogs.UserId != HttpContext.Session.GetInt32("UUID")) //<--- (Session check)
+    {
+        return RedirectToAction("Index");
+    }
+        //passing weddings data down to view
+        return View("Edit", blogs);
+    }
+
+    //---------Delete a wedding---------
+    [HttpPost("blog/{id}/delete")]
+    public IActionResult Delete(int id)
+
+    
+    {
+        Blog? blogs = db.Blogs.FirstOrDefault(d => d.PostId == id);
+
+        //To stop from deleting other users' data
+        if(blogs == null || blogs.UserId != HttpContext.Session.GetInt32("UUID")) 
+        {
+            return RedirectToAction("Index");
+        }
+
+        db.Blogs.Remove(blogs);
+        db.SaveChanges();
+        return RedirectToAction("Index");
     }
 }

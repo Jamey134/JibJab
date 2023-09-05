@@ -1,0 +1,30 @@
+@{
+    ViewData["Title"] = "Edit Blog Page";
+}
+<div class="container w-50 mx-auto shadow-lg">
+    <h2 class="text-center">Edit Your Blog</h2>
+    <form asp-action="Edit" asp-controller="Blog" method="post" class="shadow p-3 rounded">
+        <div class="mb-3">
+            <label asp-for="BlogTitle">Title:</label>
+            <input type="text" class="form-control" id="Title" asp-for="BlogTitle" >
+            <span asp-validation-for="BlogTitle" class="text-danger font-weight-bold"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="BlogContent">Content:</label>
+            <textarea asp-for="BlogContent" class="form-control" id="Content" cols="30" rows="15" placeholder="What's On Your Mind?"></textarea>
+            <span asp-validation-for="BlogContent" class="text-danger font-weight-bold"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Description">Description:</label>
+            <input type="text" class="form-control" id="Title" asp-for="Description" >
+            <span asp-validation-for="Description" class="text-danger font-weight-bold"></span>
+        </div>
+            <div class="mb-3">
+            <label asp-for="ImageURL">Image URL:</label>
+            <input type="text" class="form-control" id="Title" asp-for="ImageURL" >
+            <span asp-validation-for="ImageURL" class="text-danger font-weight-bold"></span>
+        </div>
+        <div class="mb-3 w-25 mx-auto">
+            <button class="btn btn-outline-success">Update</button>
+        </div>
+    </form>

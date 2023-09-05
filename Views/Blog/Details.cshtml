@@ -1,0 +1,34 @@
+@model Wedding
+
+<h2 class="my-4">@Model.WedderOne & @Model.WedderTwo's Wedding</h2>
+
+<h3 class="my-3">Date: @Model.Date.ToString("MMM d, yyyy")</h3>
+
+<h4 class = "my-3">Address: @Model.Address</h4>
+
+<div>
+    <h5 class="my-3">Guests:</h5>
+    <div class="border border-dark">
+        <ul class="container border">
+
+        @if (Model.Guests.Count < 1)
+        {
+            <p class>No guests are attending this wedding.</p>
+        }
+        else
+        {
+            @foreach (WeddingGuest i in Model.Guests)
+            {
+                <li class="list-inline">@i.User?.FirstName @i.User?.LastName</li>
+            }
+        }
+        </ul>
+    </div>
+    <div>
+        @if(Model.UserId == Context.Session.GetInt32("UUID"))
+        {
+        <p>
+        <a  asp-controller="Blog" asp-action="Edit" asp-route-id="@Model.PostId" class="btn btn-outline-success mt-2">Edit Your Blog</a>
+        </p>
+        }
+    </div>

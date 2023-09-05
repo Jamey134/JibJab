@@ -18,18 +18,15 @@ public class Blog
     [MinLength(3, ErrorMessage = "Title must be at least 3 characters long.")]
     public string BlogTitle {get; set;}
     [Required]
-    [MaxLength(20, ErrorMessage = "Content must more than 20 characters")]
+    [MinLength(20, ErrorMessage = "Content must at least 20 characters")]
     public string BlogContent{ get; set; }
     [Required]
-    [MinLength(10, ErrorMessage = "Description must be at least 10 characters long.")]
+    [MaxLength(50, ErrorMessage = "Description must be no more than 50 characters.")]
+    [MinLength(10, ErrorMessage = "Description must be at least 10 characters.")]
     public string Description{ get; set; }
     [Required]
     public string ImageURL{ get; set; }
-    [Required]
-    public string UrlHandle {get; set;}
-    [Required]
-    [MinLength(3, ErrorMessage = "Your name must be at least 3 characters long.")]
-    public string Author {get; set;}
+
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     
     public DateTime UpdatedAt { get; set; } = DateTime.Now;
