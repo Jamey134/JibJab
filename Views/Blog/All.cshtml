@@ -1,8 +1,27 @@
 @{
-    ViewData["Title"] = "Dashboard";
+    ViewData["Title"] = "JibJab Dashboard";
 }
 
-
+@model Blog
 
 <h1 class="display-4 text-center">Welcome, @Context.Session.GetString("Username")!</h1>
 <hr>
+@foreach (Blog b in Model)
+{
+<div class="row">
+    <div class="col-sm-3">
+        <div class="card shadow rounded mb-3">
+            <img src="@b.ImageURL" alt="@b.BlogTitle" 
+            class="card-img-top w-auto">
+            <div class="card-body text-center">
+                <p class="card-title">@b.BlogTitle</p>
+                <p>By: @b.Creator?.Username</p>
+                <p>@b.Description</p>
+            </div>
+        </div>
+    </div>
+</div>
+    
+}
+
+
