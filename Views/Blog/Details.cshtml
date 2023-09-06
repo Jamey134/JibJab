@@ -4,3 +4,10 @@
     ViewData["Title"] = "Blog Post";
 }
 
+<div class="card text-center">
+    <h1>@Model.BlogTitle</h1>
+    <h3>By: @Model.Creator.Username</h3>
+    <div class="card-header">
+        <h5>Description: @Model.Description</h5>
+    </div>
+</div>
