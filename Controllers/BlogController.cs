@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 //ADDED for session check
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace JibJab.Controllers;
 
@@ -31,7 +32,8 @@ public class BlogController : Controller
     {
         {
             // One to Many 
-            List<Blog> blogs = db.Blogs.ToList();
+            List<Blog> blogs = db.Blogs.Include(c => c.Creator).ToList();
+            
             //Many to many, add guests list and invited guests, to get 3 tables of information
             //List<Blog> blogs = db.Weddings.Include(g => g.Guests).ThenInclude(u => u.User).Include(c => c.Creator).ToList();
             return View("All", blogs);
@@ -53,6 +55,7 @@ public class BlogController : Controller
         {
             newBlog.UserId = (int)HttpContext.Session.GetInt32("UUID");
             db.Blogs.Add(newBlog);
+            Console.WriteLine("----------------->" + newBlog);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -76,6 +79,22 @@ public class BlogController : Controller
     //     }
     //     return View("Details", wedding);
     // }
+
+
+    [HttpGet("blog/{id}")]
+    public IActionResult Details(int id){
+        
+        Blog? blogs = db.Blogs.Include(a => a.Creator).FirstOrDefault(f => f.PostId == id);
+
+        if(blogs == null){
+        return RedirectToAction("Index");
+        }
+
+        else{
+            return View("Details", blogs);
+        }
+    }
+
 
     // ----------Update Blog-----------
     [HttpGet("blog/{id}/edit")]

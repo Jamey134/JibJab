@@ -40,7 +40,6 @@ public class Blog
 
 
 //-------many to many connection----------
-// ICollection is another type of collection, which derives from IEnumerable and extends it's functionality to modify (Add or Update or Remove) data.
-    //public ICollection<Tag> Tags {get; set;}
+    public List<Blogger> Bloggers {get; set;} = new List<Blogger>();
 
 }

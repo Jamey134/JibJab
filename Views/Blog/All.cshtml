@@ -2,7 +2,7 @@
     ViewData["Title"] = "JibJab Dashboard";
 }
 
-@model Blog
+@model List<Blog>
 
 <h1 class="display-4 text-center">Welcome, @Context.Session.GetString("Username")!</h1>
 <hr>
@@ -14,9 +14,10 @@
             <img src="@b.ImageURL" alt="@b.BlogTitle" 
             class="card-img-top w-auto">
             <div class="card-body text-center">
-                <p class="card-title">@b.BlogTitle</p>
-                <p>By: @b.Creator?.Username</p>
-                <p>@b.Description</p>
+                <h4 class="card-title">@b.BlogTitle</h4>
+                <p>Posted By: @b.Creator?.Username</p>
+                <p>Description: @b.Description</p>
+                <a asp-controller="Blog" asp-action="Details" asp-route-id="@b.PostId" class="btn btn-outline-success">Read</a> 
             </div>
         </div>
     </div>

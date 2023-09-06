@@ -52,6 +52,7 @@ public class UserController : Controller
         db.Users.Add(newUser);
         db.SaveChanges();
         HttpContext.Session.SetInt32("UUID", newUser.UserId);
+        HttpContext.Session.SetString("Username", newUser.Username);
 
         return RedirectToAction("Index", "blog"); // Make sure to change for the exam("Method Action from controller", "Name of controller where the method is from")
 

@@ -5,17 +5,17 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JibJab.Models;
 
-public class Bloggers
+public class Blogger
 {
     [Key]
-    public int BloggersId { get; set; }
+    public int BloggerId { get; set; }
 
     //------User Foreign Key-------
     public int UserId { get; set; }
     public User? User { get; set; }
 
 
-    //------Wedding Foreign Key-------
+    //------Blog Foreign Key-------
     public int PostId { get; set; }
     public Blog? Blog { get; set; }
 
