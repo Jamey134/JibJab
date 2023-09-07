@@ -5,7 +5,7 @@
 
 <div class="container w-50 mx-auto">
     <h2 class="text-center">Edit Your Blog</h2>
-    <form asp-action="Edit" asp-controller="Blog" method="post" class="p-3 rounded">
+    <form asp-action="Update" asp-controller="Blog" asp-route-id = "@Model.PostId" method="post" class="p-3 rounded">
         <div class="mb-3">
             <label asp-for="BlogTitle">Title:</label>
             <input type="text" class="form-control" id="Title" asp-for="BlogTitle" >

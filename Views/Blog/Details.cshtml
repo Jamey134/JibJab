@@ -5,9 +5,19 @@
 }
 
 <div class="card text-center">
-    <h1>@Model.BlogTitle</h1>
-    <h3>By: @Model.Creator.Username</h3>
     <div class="card-header">
-        <h5>Description: @Model.Description</h5>
+        <h1>@Model.BlogTitle</h1>
+        <h3>By: @Model.Creator.Username</h3>
+        <img src="@Model.ImageURL" alt="" class="card-img-top rounded mx-auto d-block">
+        <p class="fst-italic">@Model.Description</p>
     </div>
+    <div class="card-body">
+        <div class="card-text">
+            <p>@Model.BlogContent</p>
+        </div>
+    </div>
+<div class="d-flex justify-content-evenly">
+<a asp-controller="Blog" asp-action="Update" asp-route-id = "@Model.PostId" class="btn btn-success">Edit Post</a>
+<a asp-controller="Blog" asp-action="Delete" asp-route-id = "@Model.PostId" class="btn btn-danger">Delete Post</a>
+</div>
 </div>

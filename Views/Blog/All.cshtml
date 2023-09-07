@@ -4,20 +4,20 @@
 
 @model List<Blog>
 
-<h1 class="display-4 text-center text-white">Welcome, @Context.Session.GetString("Username")!</h1>
+<h1 class="display-4 text-center">Welcome, @Context.Session.GetString("Username")!</h1>
 <hr>
 @foreach (Blog b in Model)
 {
 <div class="row">
     <div class="col-sm-3">
         <div class="card shadow rounded mb-3">
-            <img src="@b.ImageURL" alt="@b.BlogTitle" 
+            <img src="@b.ImageURL" alt="@b.BlogTitle class="img-thumbnail"" 
             class="card-img-top w-auto">
             <div class="card-body text-center">
                 <h4 class="card-title">@b.BlogTitle</h4>
                 <p>Posted By: @b.Creator?.Username</p>
                 <p>Description: @b.Description</p>
-                <a asp-controller="Blog" asp-action="Details" asp-route-id="@b.PostId" class="btn btn-outline-success">Read</a> 
+                <a asp-controller="Blog" asp-action="Details" asp-route-id="@b.PostId" class="btn btn-outline-success mb-3">Read</a> 
             </div>
         </div>
     </div>

@@ -99,13 +99,13 @@ public class BlogController : Controller
     // ----------Update Blog-----------
     [HttpGet("blog/{id}/edit")]
 
-    //add id in parameter*
+    //add id in parameter
     public IActionResult Edit(int id)
     {
-        // confirm it matches the id we're passing in above*
+        // confirm it matches the id we're passing in above
     Blog? blogs = db.Blogs.Include(v => v.Creator).FirstOrDefault(p => p.PostId == id);
 
-    //confirming the creator of the wedding is editing 
+    //confirming the creator of the blog is editing 
     if (blogs == null || blogs.UserId != HttpContext.Session.GetInt32("UUID")) //<--- (Session check)
     {
         return RedirectToAction("Index");
@@ -113,6 +113,36 @@ public class BlogController : Controller
         //passing weddings data down to view
         return View("Edit", blogs);
     }
+    [HttpPost("blog/{id}/update")]
+
+    //add id in parameter
+    public IActionResult Update(Blog editedBlog, int id)
+    {
+        if(!ModelState.IsValid)
+        {
+            return Edit(id);
+        }
+        // confirm it matches the id we're passing in above
+    Blog? blogs = db.Blogs.Include(v => v.Creator).FirstOrDefault(p => p.PostId == id);
+
+    //confirming the creator of the blog is editing 
+    if (blogs == null || blogs.UserId != HttpContext.Session.GetInt32("UUID")) //<--- (Session check)
+    {
+        return RedirectToAction("Index");
+    }
+
+    blogs.BlogTitle = editedBlog.BlogTitle;
+    blogs.BlogContent = editedBlog.BlogContent;
+    blogs.Description = editedBlog.Description;
+    blogs.ImageURL = editedBlog.ImageURL;
+    blogs.UpdatedAt = DateTime.Now;
+
+    db.Blogs.Update(blogs);
+    db.SaveChanges();
+        //passing weddings data down to view
+        return RedirectToAction ("Index", blogs);
+    }
+
 
     //---------Delete a wedding---------
     [HttpPost("blog/{id}/delete")]
