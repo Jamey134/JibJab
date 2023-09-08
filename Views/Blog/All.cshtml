@@ -21,14 +21,24 @@
                     class="btn btn-outline-success mb-3">Read</a>
             </div>
             <div class="card-footer shadow rounded w-100 mx-auto text-center">
-                @foreach (Blogger like in b.Bloggers)
+                @if (b.Bloggers.Count() < 1)
                     {
-                        <p>@like.User.Username</p>
+                        <p>Be the first to like this post!</p>
                     }
-                    @{bool alreadyLiked = b.Bloggers.Any(like => like.UserId == Context.Session.GetInt32("UUID"));}
-                    <form asp-controller="Blog" asp-action="Like" asp-route-id="b.PostId" method="post">
-                        <button class="btn btn-outline-danger">
-                            @if (alreadyLiked)
+
+                    else
+                    {
+                        <p>
+                            Likes: @b.Bloggers.Count()
+                        </p>
+
+                    }
+                    @{
+                        bool alreadyLiked = b.Bloggers.Any(like => like.UserId == Context.Session.GetInt32("UUID"));
+                    }
+                <form asp-controller="Blog" asp-action="Like" asp-route-id="@b.PostId" method="post">
+                    <button class="btn btn-outline-danger">
+                        @if (alreadyLiked)
                             {
                                 Console.WriteLine("----------->" + alreadyLiked);
                                 <span>Unlike</span>
@@ -43,7 +53,6 @@
             </div>
         </div>
     </div>
-
 }
 
 

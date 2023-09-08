@@ -17,7 +17,7 @@ public class Blogger
 
     //------Blog Foreign Key-------
     public int PostId { get; set; }
-    public Blog? Blog { get; set; }
+    public Blog? Post { get; set; }
 
     public DateTime CreatedAt {get;set;} = DateTime.Now;        
     public DateTime UpdatedAt {get;set;} = DateTime.Now;

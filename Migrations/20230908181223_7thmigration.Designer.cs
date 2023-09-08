@@ -3,6 +3,7 @@ using System;
 using JibJab.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JibJab.Migrations
 {
     [DbContext(typeof(MyContext))]
-    partial class MyContextModelSnapshot : ModelSnapshot
+    [Migration("20230908181223_7thmigration")]
+    partial class _7thmigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -64,6 +66,9 @@ namespace JibJab.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int?>("BlogPostId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
@@ -78,7 +83,7 @@ namespace JibJab.Migrations
 
                     b.HasKey("BloggerId");
 
-                    b.HasIndex("PostId");
+                    b.HasIndex("BlogPostId");
 
                     b.HasIndex("UserId");
 
@@ -136,11 +141,9 @@ namespace JibJab.Migrations
 
             modelBuilder.Entity("JibJab.Models.Blogger", b =>
                 {
-                    b.HasOne("JibJab.Models.Blog", "Post")
+                    b.HasOne("JibJab.Models.Blog", "Blog")
                         .WithMany("Bloggers")
-                        .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BlogPostId");
 
                     b.HasOne("JibJab.Models.User", "User")
                         .WithMany("Bloggers")
@@ -148,7 +151,7 @@ namespace JibJab.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Post");
+                    b.Navigation("Blog");
 
                     b.Navigation("User");
                 });

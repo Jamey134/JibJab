@@ -46,12 +46,12 @@ public class BlogController : Controller
     [HttpGet("blogs/new")]
     public IActionResult New()
     {
-        return View("New"); //<--- HTML page to see our new, displayed wedding
+        return View("New"); //<--- HTML page to see our new, displayed post
     }
 
     //-------Add a Blog into db--------
     [HttpPost("blogs/create")]
-    public IActionResult Create(Blog newBlog) //<----- Method to create a wedding and add in db
+    public IActionResult Create(Blog newBlog) //<----- Method to create blog and add in db
     {
         if (ModelState.IsValid) //<--- validation 
         {
@@ -68,19 +68,7 @@ public class BlogController : Controller
         }
     }
 
-    //---------View One (READ) Wedding----------
-    // [HttpGet("blogs/{postId}")] //<--- Double check the id nomenclature
-    // public IActionResult Details(int postId)
-    // {
-    //     //Include many to many guests list
-    //     Blog? wedding = db.Blogs.Include(g => g.Guests).ThenInclude(u => u.User).FirstOrDefault(w => w.WeddingId == weddingId);
-
-    //     if (wedding == null)
-    //     {
-    //         return RedirectToAction("Index");
-    //     }
-    //     return View("Details", wedding);
-    // }
+    
 
 
     [HttpGet("blog/{id}")]
@@ -115,7 +103,7 @@ public class BlogController : Controller
         {
             return RedirectToAction("Index");
         }
-        //passing weddings data down to view
+        //passing blog data down to view
         return View("Edit", blogs);
     }
 
@@ -146,12 +134,12 @@ public class BlogController : Controller
 
         db.Blogs.Update(blogs);
         db.SaveChanges();
-        //passing weddings data down to view
+        //passing blog data down to view
         return RedirectToAction("Index", blogs);
     }
 
 
-    [HttpPost("blog/{id}/delete")]
+[HttpGet("blog/{id}/delete")]
 public IActionResult Delete(int id)
 {
     // Find the blog by id
@@ -176,14 +164,14 @@ public IActionResult Delete(int id)
     [HttpPost("blogs/{id}/likes")]
     public IActionResult Like(int id)
     {
-        // First get the session
+        //First get the session
         int? userId = HttpContext.Session.GetInt32("UUID");
 
-        // if session value is null, send back to dashboard.
-        if (userId == null)
-        {
-            return RedirectToAction("Index");
-        }
+        // // if session value is null, send back to dashboard.
+        // if (userId == null)
+        // {
+        //     return RedirectToAction("Index");
+        // }
 
         Blogger? existingLike = db.Bloggers.FirstOrDefault(l => l.UserId == userId.Value && l.PostId == id);
 
