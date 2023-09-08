@@ -41,6 +41,9 @@ public class User
     [Compare("Password")]
     public string PasswordConfirm { get; set; }
 
+    public List<Blog> AuthoredBlogs { get; set; } = new List<Blog>();
+
+    public List<Blogger> Bloggers { get; set; } = new List<Blogger>();
 
 }
 

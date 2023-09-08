@@ -8,21 +8,42 @@
 <hr>
 @foreach (Blog b in Model)
 {
-<div class="row">
+    <div class="row">
     <div class="col-sm-3">
         <div class="card shadow rounded mb-3">
-            <img src="@b.ImageURL" alt="@b.BlogTitle class="img-thumbnail"" 
-            class="card-img-top w-auto">
+            <img src="@b.ImageURL" alt="@b.BlogTitle" class="img-thumbnail" class="card-img-top w-auto">
             <div class="card-body text-center">
                 <h4 class="card-title">@b.BlogTitle</h4>
                 <p>Posted By: @b.Creator?.Username</p>
                 <p>Description: @b.Description</p>
-                <a asp-controller="Blog" asp-action="Details" asp-route-id="@b.PostId" class="btn btn-outline-success mb-3">Read</a> 
+                <small class="text-muted">Submitted On: @b.CreatedAt</small>
+                <a asp-controller="Blog" asp-action="Details" asp-route-id="@b.PostId"
+                    class="btn btn-outline-success mb-3">Read</a>
+            </div>
+            <div class="card-footer shadow rounded w-100 mx-auto text-center">
+                @foreach (Blogger like in b.Bloggers)
+                    {
+                        <p>@like.User.Username</p>
+                    }
+                    @{bool alreadyLiked = b.Bloggers.Any(like => like.UserId == Context.Session.GetInt32("UUID"));}
+                    <form asp-controller="Blog" asp-action="Like" asp-route-id="b.PostId" method="post">
+                        <button class="btn btn-outline-danger">
+                            @if (alreadyLiked)
+                            {
+                                Console.WriteLine("----------->" + alreadyLiked);
+                                <span>Unlike</span>
+                            }
+                            else
+                            {
+                                <span>Like</span>
+                            }
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
-    
+
 }
 
 

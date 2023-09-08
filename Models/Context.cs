@@ -14,7 +14,7 @@ public class MyContext : DbContext
     // The name of our table in our database will be based on the name we provide here
     // This is where we provide a plural version of our model to fit table naming standards    
     
-    //public DbSet<Tag> Tags { get; set; } 
+    public DbSet<Blogger> Bloggers { get; set; } 
     public DbSet<Blog> Blogs { get; set; }  //<---- Change possibly?
     public DbSet<User> Users { get; set; }  //<---- Change possibly?
 }

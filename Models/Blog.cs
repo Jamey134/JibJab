@@ -36,9 +36,6 @@ public class Blog
 
     public User? Creator {get; set;}
 
-
-
-
 //-------many to many connection----------
     public List<Blogger> Bloggers {get; set;} = new List<Blogger>();
 
